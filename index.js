@@ -26,7 +26,8 @@ mongoose.connect("mongodb://localhost:27017/myLoginRegisterDB", {
 const userSchema = new mongoose.Schema({
     name: String,
     email: String,
-    password: String
+    password: String,
+    designation: String,
 })
 
 const User = new mongoose.model("User", userSchema)
@@ -57,7 +58,7 @@ app.post("/login",(req,res)=>{
 
 app.post("/register", (req, res)=> {
     console.log("********",req.body);
-    const { name, email, password} = req.body
+    const { name, email, password, designation} = req.body
     User.findOne({email: email}, (err, user) => {
         if(user){
             res.send({message: "User already registerd"})
@@ -65,7 +66,8 @@ app.post("/register", (req, res)=> {
             const user = new User({
                 name,
                 email,
-                password
+                password,
+                designation
             })
             user.save(err => {
                 if(err) {

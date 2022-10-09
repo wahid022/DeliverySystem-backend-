@@ -144,6 +144,7 @@ app.post("/customer", (req, res)=> {
 app.post("/products", (req, res)=> {
 
     console.log("********",req.body);
+    const { name, product, price} = req.body
     
 }) 
 
